@@ -1,0 +1,6 @@
+build/
+*.xcworkspace
+.DS_Store
+*.sublime-workspace
+.cache/
+*.orig

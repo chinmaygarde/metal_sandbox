@@ -1,0 +1,33 @@
+{
+  "build_systems": [
+    {
+      "name": "Metal Sandbox Build All",
+      "shell_cmd": "xcrun xcodebuild",
+      "working_dir": "${project_path}",
+      "file_regex": "(.*):(\\d+):(\\d+)(.*)",
+      "shell": true,
+    }
+  ],
+  "folders": [
+    {
+      "path": ".",
+      "name": "Metal Sandbox",
+    }
+  ],
+  "settings":
+  {
+    "LSP":
+    {
+      "clangd":
+      {
+        "initializationOptions" : {
+          "binary": "system",
+          "clangd.compile-commands-dir": "build",
+          "clangd.background-index": true,
+          "clangd.header-insertion": "never",
+          "clangd.clang-tidy": true,
+        }
+      },
+    },
+  },
+}
