@@ -2,7 +2,7 @@
   "build_systems": [
     {
       "name": "Metal Sandbox Build All",
-      "shell_cmd": "xcrun xcodebuild",
+      "shell_cmd": "make",
       "working_dir": "${project_path}",
       "file_regex": "(.*):(\\d+):(\\d+)(.*)",
       "shell": true,
