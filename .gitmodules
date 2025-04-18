@@ -13,3 +13,6 @@
 [submodule "third_party/hedley"]
 	path = third_party/hedley
 	url = https://github.com/nemequ/hedley.git
+[submodule "third_party/metalcpp"]
+	path = third_party/metalcpp
+	url = https://github.com/bkaradzic/metal-cpp

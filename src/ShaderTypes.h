@@ -1,14 +1,3 @@
-//
-//  ShaderTypes.h
-//  MetalSandbox
-//
-//  Created by Chinmay Garde on 4/12/25.
-//
-
-//
-//  Header containing types and enum constants shared between Metal shaders and
-//  Swift/ObjC source
-//
 #ifndef ShaderTypes_h
 #define ShaderTypes_h
 

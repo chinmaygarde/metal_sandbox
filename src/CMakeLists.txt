@@ -1,18 +1,14 @@
 add_executable(metal_sandbox
-  AppDelegate.h
-  AppDelegate.mm
-  GameViewController.h
-  GameViewController.mm
   macros.h
   main.mm
-  Renderer.h
-  Renderer.mm
+  metal.cc
   ShaderTypes.h
 )
 
 target_include_directories(metal_sandbox
   PUBLIC
     ../third_party/hedley
+    ../third_party/metalcpp/SingleHeader
 )
 
 target_compile_options(metal_sandbox PRIVATE "-fobjc-arc")
@@ -28,4 +24,9 @@ target_link_libraries(metal_sandbox
     glfw
     glm
     jfml
+)
+
+metal_library(Shaders
+  Shaders.metal
+  more.metal
 )
