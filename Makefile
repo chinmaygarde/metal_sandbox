@@ -1,12 +1,15 @@
-.PHONY: main clean
+.PHONY: build clean sync
 
-main: build
-	rm -rf build/CompilationDatabase
-	xcrun xcodebuild -configuration Debug OTHER_CFLAGS="\$(inherited)-gen-cdb-fragment-path build/CompilationDatabase"
-	./tools/merge_compilation_commands.py --fragments-dir build/CompilationDatabase --out-path build
+build: build/build.ninja
+	cmake --build build
+	./build/src/metal_sandbox
 
-build:
+build/build.ninja:
 	mkdir -p build
+	cmake -G Ninja -B build
 
 clean:
 	rm -rf build
+
+sync:
+	git submodule update --init --recursive -j 8
