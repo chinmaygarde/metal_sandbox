@@ -8,6 +8,7 @@ set(TOOLBOX_DIR "${CMAKE_CURRENT_LIST_DIR}")
 
 function(metal_library LIBRARY_NAME)
   set(SHADER_OBJECTS)
+  set(SHADER_SOURCES)
   foreach(SHADER_PATH IN LISTS ARGN)
     get_filename_component(ABSOLUTE_SHADER_PATH "${SHADER_PATH}" ABSOLUTE)
     get_filename_component(SHADER_NAME "${SHADER_PATH}" NAME)
@@ -24,6 +25,7 @@ function(metal_library LIBRARY_NAME)
               ${ABSOLUTE_SHADER_PATH}
     )
     list(APPEND SHADER_OBJECTS "${CMAKE_CURRENT_BINARY_DIR}/${SHADER_NAME}.o")
+    list(APPEND SHADER_SOURCES ${ABSOLUTE_SHADER_PATH})
   endforeach()
 
   add_custom_command(
@@ -39,6 +41,13 @@ function(metal_library LIBRARY_NAME)
     ${LIBRARY_NAME}
     ALL
     DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${LIBRARY_NAME}.metallib
+  )
+
+  # For IDEs. Otherwise does nothing.
+  target_sources(
+    ${LIBRARY_NAME}
+      PRIVATE
+        ${SHADER_SOURCES}
   )
 
 endfunction()
