@@ -1,12 +1,10 @@
-
 if(__metal_library)
   return()
 endif()
 set(__metal_library INCLUDED)
 
-set(TOOLBOX_DIR "${CMAKE_CURRENT_LIST_DIR}")
-
-function(metal_library LIBRARY_NAME)
+function(metal_library TARGET_NAME)
+  set(LIBRARY_NAME "${TARGET_NAME}_shaders")
   set(SHADER_OBJECTS)
   set(SHADER_SOURCES)
   foreach(SHADER_PATH IN LISTS ARGN)
@@ -20,10 +18,12 @@ function(metal_library LIBRARY_NAME)
       COMMENT "Compiling Metal Shader: ${SHADER_NAME}"
       COMMAND xcrun metal
               -o ${CMAKE_CURRENT_BINARY_DIR}/${SHADER_NAME}.o
+              -Oz
               -MMD
               -MF ${CMAKE_CURRENT_BINARY_DIR}/${SHADER_NAME}.d
               ${ABSOLUTE_SHADER_PATH}
     )
+
     list(APPEND SHADER_OBJECTS "${CMAKE_CURRENT_BINARY_DIR}/${SHADER_NAME}.o")
     list(APPEND SHADER_SOURCES ${ABSOLUTE_SHADER_PATH})
   endforeach()
@@ -34,20 +34,12 @@ function(metal_library LIBRARY_NAME)
     COMMENT "Linking Metal Library: ${LIBRARY_NAME}.metallib"
     COMMAND xcrun metal
             -o ${CMAKE_CURRENT_BINARY_DIR}/${LIBRARY_NAME}.metallib
+            -Oz
             ${SHADER_OBJECTS}
   )
 
-  add_custom_target(
-    ${LIBRARY_NAME}
-    ALL
-    DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${LIBRARY_NAME}.metallib
-  )
-
-  # For IDEs. Otherwise does nothing.
-  target_sources(
-    ${LIBRARY_NAME}
-      PRIVATE
-        ${SHADER_SOURCES}
-  )
+  xxd(${TARGET_NAME}
+      ${CMAKE_CURRENT_BINARY_DIR}/${LIBRARY_NAME}.metallib
+      )
 
 endfunction()

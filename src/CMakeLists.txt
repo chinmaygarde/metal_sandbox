@@ -26,7 +26,7 @@ target_link_libraries(metal_sandbox
     jfml
 )
 
-metal_library(Shaders
+metal_library(metal_sandbox
   Shaders.metal
   more.metal
 )
