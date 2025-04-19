@@ -4,7 +4,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tools/cmake")
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/third_party/cmake_toolbox")
 include(CMakeToolboxInitialize)
-include(metal_library)
+
 CMakeToolboxInitialize()
 
 SetCAndCXXStandard(11 20)

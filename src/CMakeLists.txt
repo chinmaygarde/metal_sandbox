@@ -28,5 +28,4 @@ target_link_libraries(metal_sandbox
 
 metal_library(metal_sandbox
   Shaders.metal
-  more.metal
 )
